@@ -1,0 +1,6 @@
+[routes]
+
+GET / [ajax] = \App\Controller\BaseController->get
+
+[globals]
+ONERROR=\App\Controller\BaseController->error

@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Controller;
+
+use Base;
+
+class BaseController
+{
+    public function get(Base $base)
+    {
+        print $base->get('msg.hello');
+    }
+
+    public function error(Base $base)
+    {
+        print sprintf($base->get('msg.error'), $base->get('ERROR.status'));
+    }
+}

@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Controller;
+
+use Base;
+
+class BaseController
+{
+    public function get(Base $base)
+    {
+        header('Content-Type: application/json');
+        die(json_encode(['msg' => $base->get('msg.hello')]));
+    }
+
+    public function error(Base $base)
+    {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'error' => $base->get('ERROR.code'),
+            'message' => $base->get('ERROR.status'),
+        ]);
+    }
+}

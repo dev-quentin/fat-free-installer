@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Controller;
+
+use Base, Template;
+
+class BaseController
+{
+    public function get(Base $base)
+    {
+        print Template::instance()->render("hello.html");
+    }
+
+    public function error(Base $base)
+    {
+        $codeError = $base->get('ERROR.code');
+        $template = "error/{$codeError}.html";
+
+        foreach ($base->split($base->UI) as $dir) {
+            $view = $base->fixslashes($dir . $template);
+            if (is_file($view)) {
+                die(Template::instance()->render($template));
+            }
+        }
+
+        die(Template::instance()->render("error/error.html"));
+    }
+}

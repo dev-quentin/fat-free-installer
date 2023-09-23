@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+use FatFreeInstaller\{ Application, Kernel };
+
+define('BASE_PATH', __DIR__);
+
+/*
+|--------------------------------------------------------------------------
+| Checking The Requirements
+|--------------------------------------------------------------------------
+*/
+if (php_sapi_name() !== 'cli') {
+    die("You're not allowed to execute this operation (cli mode only)");
+}
+
+if (version_compare(phpversion(), '8.0.14', '<')) {
+    die("PHP version isn't high enough PHP version 8.0.14 is the minimum requirement");
+}
+
+if (!is_file(join(DIRECTORY_SEPARATOR, [BASE_PATH, 'vendor', 'autoload.php']))) {
+    die('Please run command : composer install');
+}
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+*/
+require_once join(DIRECTORY_SEPARATOR, [BASE_PATH, "vendor", "autoload.php"]);
+
+/*
+|--------------------------------------------------------------------------
+| Init Application
+|--------------------------------------------------------------------------
+*/
+
+$app = Application::getInstance();
+
+$kernel = $app->make(Kernel::class);
+$kernel->boot();

@@ -1,0 +1,40 @@
+<?php
+
+define('BASE_PATH', __DIR__);
+define('APP_PATH', BASE_PATH . DIRECTORY_SEPARATOR . "App");
+define('CONFIG_PATH', APP_PATH . DIRECTORY_SEPARATOR . "Config");
+
+/*
+|--------------------------------------------------------------------------
+| Checking The Requirements
+|--------------------------------------------------------------------------
+*/
+if (php_sapi_name() !== 'cli') {
+    die("You're not allowed to execute this operation (cli mode only)");
+}
+if (!is_file(join(DIRECTORY_SEPARATOR, [BASE_PATH, "vendor", "autoload.php"]))) {
+    die("Please run command : <pre>composer install</pre>");
+}
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+*/
+require_once join(DIRECTORY_SEPARATOR, [BASE_PATH, "vendor", "autoload.php"]);
+
+/*
+|--------------------------------------------------------------------------
+| Init Application
+|--------------------------------------------------------------------------
+*/
+$app = Base::instance();
+$app->config(join(DIRECTORY_SEPARATOR, [CONFIG_PATH, "config.ini"]));
+$app->config(join(DIRECTORY_SEPARATOR, [CONFIG_PATH, "routes.ini"]));
+
+/*
+ |--------------------------------------------------------------------------
+ | Run The Application
+ |--------------------------------------------------------------------------
+ */
+$app->run();

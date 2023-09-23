@@ -1,0 +1,38 @@
+<?php
+
+define('PUBLIC_PATH', __DIR__);
+define('BASE_PATH', PUBLIC_PATH . DIRECTORY_SEPARATOR . "..");
+define('APP_PATH', BASE_PATH . DIRECTORY_SEPARATOR . "App");
+define('CONFIG_PATH', APP_PATH . DIRECTORY_SEPARATOR . "Config");
+
+/*
+|--------------------------------------------------------------------------
+| Checking The Requirements
+|--------------------------------------------------------------------------
+*/
+if (!is_file(join(DIRECTORY_SEPARATOR, [BASE_PATH, "vendor", "autoload.php"]))) {
+    die("Please run command : <pre>composer install</pre>");
+}
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+*/
+require_once join(DIRECTORY_SEPARATOR, [BASE_PATH, "vendor", "autoload.php"]);
+
+/*
+|--------------------------------------------------------------------------
+| Init Application
+|--------------------------------------------------------------------------
+*/
+$app = Base::instance();
+$app->config(join(DIRECTORY_SEPARATOR, [CONFIG_PATH, "config.ini"]));
+$app->config(join(DIRECTORY_SEPARATOR, [CONFIG_PATH, "routes.ini"]));
+
+/*
+ |--------------------------------------------------------------------------
+ | Run The Application
+ |--------------------------------------------------------------------------
+ */
+$app->run();

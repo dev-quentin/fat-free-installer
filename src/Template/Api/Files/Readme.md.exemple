@@ -1,0 +1,18 @@
+# <p align="center">API</p>
+  
+API created with Fat-Free Framework
+
+## 🛠️ Tech Stack
+- [PHP](https://www.php.net/)   
+- [Fat-Free](https://fatfreeframework.com/3.8/home)
+
+
+## 🛠️ Install Dependencies    
+```bash
+composer install
+```
+
+## 🧑🏻‍💻 Built-in web server
+```bash
+php -S localhost:8000 -t ./public/
+```
